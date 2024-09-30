@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Background="LightGray" Grid.Row="0">
+            <Button Content="Закрити" Click="CloseButton_Click" Margin="5" Foreground="Red" />
+        </StackPanel>
+
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"
+           HorizontalAlignment="Stretch"
+           VerticalAlignment="Stretch"
+           Grid.Row="1" Margin="10"/>
     </Grid>
 </Window>
