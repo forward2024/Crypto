@@ -8,132 +8,206 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource SystemControlPageBackgroundAltHighBrush}">
-
     <Window.Resources>
-        <SolidColorBrush x:Key="LightThemeButtonHoverBrush" Color="LightGray"/>
-        <SolidColorBrush x:Key="DarkThemeButtonHoverBrush" Color="#505050"/>
-        <SolidColorBrush x:Key="LightThemeButtonPressedBrush" Color="#C0C0C0"/>
-        <SolidColorBrush x:Key="DarkThemeButtonPressedBrush" Color="#404040"/>
-
-        <Style TargetType="Button" x:Key="CustomButtonStyle">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FontSize" Value="19"/>
-            <Setter Property="Height" Value="54"/>
-            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+        <SolidColorBrush x:Key="LightThemeButtonHoverBrush"
+                         Color="LightGray" />
+        <SolidColorBrush x:Key="DarkThemeButtonHoverBrush"
+                         Color="#505050" />
+        <SolidColorBrush x:Key="LightThemeButtonPressedBrush"
+                         Color="#C0C0C0" />
+        <SolidColorBrush x:Key="DarkThemeButtonPressedBrush"
+                         Color="#404040" />
+        <Style TargetType="Button"
+               x:Key="CustomButtonStyle">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="FontSize"
+                    Value="19" />
+            <Setter Property="Height"
+                    Value="54" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Transparent">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="Transparent">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Stretch" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <!-- Ефект наведення на кнопку залежно від теми -->
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
-                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}" Value="Light"/>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                               Value="True" />
+                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}"
+                                               Value="Light" />
                                 </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource LightThemeButtonHoverBrush}"/>
+                                <Setter Property="Background"
+                                        Value="{StaticResource LightThemeButtonHoverBrush}" />
                             </MultiDataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
-                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}" Value="Dark"/>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                               Value="True" />
+                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}"
+                                               Value="Dark" />
                                 </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource DarkThemeButtonHoverBrush}"/>
+                                <Setter Property="Background"
+                                        Value="{StaticResource DarkThemeButtonHoverBrush}" />
                             </MultiDataTrigger>
                             <!-- Ефект натискання на кнопку залежно від теми -->
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="True"/>
-                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}" Value="Light"/>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}"
+                                               Value="True" />
+                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}"
+                                               Value="Light" />
                                 </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource LightThemeButtonPressedBrush}"/>
+                                <Setter Property="Background"
+                                        Value="{StaticResource LightThemeButtonPressedBrush}" />
                             </MultiDataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="True"/>
-                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}" Value="Dark"/>
+                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}"
+                                               Value="True" />
+                                    <Condition Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}"
+                                               Value="Dark" />
                                 </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource DarkThemeButtonPressedBrush}"/>
+                                <Setter Property="Background"
+                                        Value="{StaticResource DarkThemeButtonPressedBrush}" />
                             </MultiDataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
         <!-- Стиль для лівого блоку -->
-        <Style TargetType="Grid" x:Key="LeftPanelStyle">
-            <Setter Property="Background" Value="White"/>
+        <Style TargetType="Grid"
+               x:Key="LeftPanelStyle">
+            <Setter Property="Background"
+                    Value="White" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}" Value="Dark">
-                    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}"/>
+                <DataTrigger Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}"
+                             Value="Dark">
+                    <Setter Property="Background"
+                            Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
     </Window.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
         <!-- Лівий блок -->
-        <Grid Grid.Column="0" Style="{StaticResource LeftPanelStyle}" HorizontalAlignment="Stretch">
+        <Grid Grid.Column="0"
+              Style="{StaticResource LeftPanelStyle}"
+              HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
             <!-- Верхнє меню -->
-            <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                <Button x:Name="BackButton" Style="{StaticResource CustomButtonStyle}" Click="BackButton_Click" Visibility="Hidden">
+            <StackPanel Grid.Row="0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Stretch">
+                <Button x:Name="BackButton"
+                        Style="{StaticResource CustomButtonStyle}"
+                        Click="BackButton_Click"
+                        Visibility="Hidden">
                     <DockPanel>
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="17" Text="&#xE72B;" Width="17" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                        <TextBlock Text="Back" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   FontSize="17"
+                                   Text=""
+                                   Width="17"
+                                   VerticalAlignment="Center"
+                                   Margin="20,0,0,0" />
+                        <TextBlock Text="Back"
+                                   FontSize="16"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center" />
                     </DockPanel>
                 </Button>
-                <Button Style="{StaticResource CustomButtonStyle}" VerticalAlignment="Center" Click="HomeButton_Click">
+                <Button Style="{StaticResource CustomButtonStyle}"
+                        VerticalAlignment="Center"
+                        Click="HomeButton_Click">
                     <DockPanel HorizontalAlignment="Center">
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="20" Text="&#xE80F;" Width="22" VerticalAlignment="Center"/>
-                        <TextBlock Text="Home" FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   FontSize="20"
+                                   Text=""
+                                   Width="22"
+                                   VerticalAlignment="Center" />
+                        <TextBlock Text="Home"
+                                   FontSize="18"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center" />
                     </DockPanel>
                 </Button>
-                <Button Style="{StaticResource CustomButtonStyle}" VerticalAlignment="Center" Click="TestButton_Click">
+                <Button Style="{StaticResource CustomButtonStyle}"
+                        VerticalAlignment="Center"
+                        Click="TestButton_Click">
                     <DockPanel HorizontalAlignment="Center">
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="20" Text="&#xE80F;" Width="22" VerticalAlignment="Center"/>
-                        <TextBlock Text="Test" FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   FontSize="20"
+                                   Text=""
+                                   Width="22"
+                                   VerticalAlignment="Center" />
+                        <TextBlock Text="Test"
+                                   FontSize="18"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center" />
                     </DockPanel>
                 </Button>
             </StackPanel>
-
             <!-- Нижнє меню -->
-            <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-                <Button Style="{StaticResource CustomButtonStyle}" Click="ToggleThemeButton_Click">
+            <StackPanel Grid.Row="2"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Stretch">
+                <Button Style="{StaticResource CustomButtonStyle}"
+                        Click="ToggleThemeButton_Click">
                     <DockPanel>
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="22" Text="&#xE706;" Width="22" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                        <TextBlock Text="Switch Theme" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   FontSize="22"
+                                   Text=""
+                                   Width="22"
+                                   VerticalAlignment="Center"
+                                   Margin="20,0,0,0" />
+                        <TextBlock Text="Switch Theme"
+                                   FontSize="16"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center" />
                     </DockPanel>
                 </Button>
-
-                <Button Style="{StaticResource CustomButtonStyle}" Click="CloseButton_Click">
+                <Button Style="{StaticResource CustomButtonStyle}"
+                        Click="CloseButton_Click">
                     <DockPanel>
-                        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="17" Text="&#xE8BB;" Width="17" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                        <TextBlock Text="Close" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                   FontSize="17"
+                                   Text=""
+                                   Width="17"
+                                   VerticalAlignment="Center"
+                                   Margin="20,0,0,0" />
+                        <TextBlock Text="Close"
+                                   FontSize="16"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center" />
                     </DockPanel>
                 </Button>
             </StackPanel>
         </Grid>
-
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="1"
+        <Frame x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               Grid.Column="1"
                HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch"
-               Navigated="MainFrame_Navigated"/>
+               Navigated="MainFrame_Navigated" />
     </Grid>
 </Window>

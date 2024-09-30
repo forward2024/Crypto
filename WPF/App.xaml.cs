@@ -7,6 +7,10 @@ global using ModernWpf;
 global using System.Diagnostics;
 global using WPF.Views.Frames;
 global using System.Windows.Navigation;
+global using System.Windows.Controls;
+global using WPF.Services;
+global using System.ComponentModel;
+global using System.Runtime.CompilerServices;
 
 namespace WPF;
 
