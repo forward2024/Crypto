@@ -11,6 +11,9 @@ global using System.Windows.Controls;
 global using WPF.Services;
 global using System.ComponentModel;
 global using System.Runtime.CompilerServices;
+global using WPF.ViewModels;
+global using System.Globalization;
+global using System.Windows.Data;
 
 namespace WPF;
 

@@ -5,7 +5,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+        ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
         MainFrame.Navigate(new Home());
     }
 
