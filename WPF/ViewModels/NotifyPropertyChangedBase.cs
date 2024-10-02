@@ -1,6 +1,5 @@
 ﻿namespace WPF.ViewModels;
 
-
 public abstract class NotifyPropertyChangedBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;

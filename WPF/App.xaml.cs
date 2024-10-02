@@ -14,6 +14,10 @@ global using System.Runtime.CompilerServices;
 global using WPF.ViewModels;
 global using System.Globalization;
 global using System.Windows.Data;
+global using LiveChartsCore.SkiaSharpView;
+global using LiveChartsCore;
+global using SkiaSharp;
+global using LiveChartsCore.SkiaSharpView.Painting;
 
 namespace WPF;
 

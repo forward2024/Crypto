@@ -2,6 +2,8 @@
 
 public partial class MainWindow : Window
 {
+    public static event EventHandler<ApplicationTheme?> ThemeChanged;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -23,6 +25,8 @@ public partial class MainWindow : Window
         {
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
         }
+
+        ThemeChanged?.Invoke(this, ThemeManager.Current.ApplicationTheme);
     }
 
     private void BackButton_Click(object sender, RoutedEventArgs e)

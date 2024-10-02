@@ -1,0 +1,48 @@
+﻿<Page x:Class="WPF.Views.Frames.DetailsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,20,0,10">
+            <TextBlock Text="Вибраний актив" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Style="{StaticResource DynamicTextStyle}"
+                       Margin="0,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Назва: " FontWeight="Bold" Style="{StaticResource DynamicTextStyle}" />
+                <TextBlock Text="{Binding SelectedCurrency.Name}" FontSize="14" Style="{StaticResource DynamicTextStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Символ: " FontWeight="Bold" Style="{StaticResource DynamicTextStyle}" />
+                <TextBlock Text="{Binding SelectedCurrency.Symbol}" FontSize="14" Style="{StaticResource DynamicTextStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Ранг: " FontWeight="Bold" Style="{StaticResource DynamicTextStyle}" />
+                <TextBlock Text="{Binding SelectedCurrency.Rank}" FontSize="14" Style="{StaticResource DynamicTextStyle}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Ціна: " FontWeight="Bold" Style="{StaticResource DynamicTextStyle}" />
+                <TextBlock Text="{Binding SelectedCurrency.PriceUsd}" FontSize="14" Style="{StaticResource DynamicTextStyle}" />
+            </StackPanel>
+        </StackPanel>
+
+        <lvc:CartesianChart Series="{Binding Series}" 
+                            XAxes="{Binding XAxes}" 
+                            YAxes="{Binding YAxes}" 
+                            ZoomMode="X" 
+                            Grid.Row="1"
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Stretch"/>
+    </Grid>
+</Page>

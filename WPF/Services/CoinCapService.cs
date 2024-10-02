@@ -33,4 +33,15 @@ internal class CoinCapService
 
         return result.Data;
     }
+
+    public async Task<List<HistoryData>> GetAssetHistoryAsync(string assetId, string interval = "d1")
+    {
+        var response = await httpClient.GetAsync($"assets/{assetId}/history?interval={interval}");
+        response.EnsureSuccessStatusCode();
+
+        var content = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<HistoryResponse>(content);
+
+        return result.Data;
+    }
 }

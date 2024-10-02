@@ -2,7 +2,7 @@
 
 
 #pragma warning disable CS8618
-internal class Currency
+public class Currency
 {
     [JsonProperty("id")]
     public string Id { get; set; }

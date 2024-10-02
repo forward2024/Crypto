@@ -11,6 +11,19 @@
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
             </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="LightThemeTextBrush" Color="Black" />
+            <SolidColorBrush x:Key="DarkThemeTextBrush" Color="White" />
+
+            <Style TargetType="TextBlock" x:Key="DynamicTextStyle">
+                <Setter Property="Foreground" Value="{DynamicResource LightThemeTextBrush}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Source={x:Static ui:ThemeManager.Current}, Path=ApplicationTheme}" Value="Dark">
+                        <Setter Property="Foreground" Value="{DynamicResource DarkThemeTextBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
