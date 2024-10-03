@@ -7,18 +7,28 @@
         <conv:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <conv:PlaceholderVisibilityConverter x:Key="PlaceholderVisibilityConverter" />
-
-        <Style TargetType="TextBox" x:Key="SearchBoxStyle">
-            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseLowBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-            <Setter Property="Padding" Value="10,0" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="Height" Value="50" />
-            <Setter Property="Width" Value="500" />
+        <Style TargetType="TextBox"
+               x:Key="SearchBoxStyle">
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="BorderBrush"
+                    Value="Gray" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="Padding"
+                    Value="10,0" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Height"
+                    Value="50" />
+            <Setter Property="Width"
+                    Value="500" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -71,46 +81,40 @@
             <ColumnDefinition Width="7*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-
-        <Border Grid.Column="0"
-                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                BorderThickness="1, 0, 1, 0">
-            <Grid>
-                <Grid Margin="10">
-                    <TextBox Style="{StaticResource SearchBoxStyle}"
-                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Top" />
-                </Grid>
-                <ProgressBar IsIndeterminate="True"
-                             Height="30"
-                             Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
-                             Visibility="{Binding IsAllLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"
-                             Margin="0,70,0,0" />
-                <ListBox ItemsSource="{Binding AllCurrencies}"
-                         Visibility="{Binding IsAllLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
-                         Margin="0,70,0,0"
-                         VerticalAlignment="Stretch">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Rank}"
-                                           Width="50" />
-                                <TextBlock Text="{Binding Name}"
-                                           Width="200" />
-                                <TextBlock Text="{Binding Symbol}"
-                                           Width="50" />
-                                <TextBlock Text="{Binding PriceUsd}"
-                                           Width="100" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+        <Grid Grid.Column="0">
+            <Grid Margin="10">
+                <TextBox Style="{StaticResource SearchBoxStyle}"
+                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Top" />
             </Grid>
-        </Border>
-
+            <ProgressBar IsIndeterminate="True"
+                         Height="30"
+                         Foreground="Gray"
+                         Visibility="{Binding IsAllLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Top"
+                         Margin="0,70,0,0" />
+            <ListBox ItemsSource="{Binding AllCurrencies}"
+                     Visibility="{Binding IsAllLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                     Margin="0,70,0,0"
+                     VerticalAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Rank}"
+                                       Width="50" />
+                            <TextBlock Text="{Binding Name}"
+                                       Width="200" />
+                            <TextBlock Text="{Binding Symbol}"
+                                       Width="50" />
+                            <TextBlock Text="{Binding PriceUsd}"
+                                       Width="100" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
         <Grid Grid.Column="1">
             <ProgressBar IsIndeterminate="True"
                          Height="30"
