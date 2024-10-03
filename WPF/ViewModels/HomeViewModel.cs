@@ -82,7 +82,7 @@ internal class HomeViewModel : NotifyPropertyChangedBase
         get => searchQuery;
         set
         {
-            searchQuery = value;
+            searchQuery = value?.Trim();
             OnPropertyChanged();
             SearchCryptocurrencies();
         }
