@@ -2,52 +2,42 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:conv="clr-namespace:WPF.Helpers"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
       Loaded="Page_Loaded">
 
     <Page.Resources>
         <conv:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <conv:PlaceholderVisibilityConverter x:Key="PlaceholderVisibilityConverter" />
-        <Style TargetType="TextBox"
-               x:Key="SearchBoxStyle">
-            <Setter Property="Background"
-                    Value="White" />
-            <Setter Property="BorderBrush"
-                    Value="Gray" />
-            <Setter Property="BorderThickness"
-                    Value="1" />
-            <Setter Property="Foreground"
-                    Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-            <Setter Property="Padding"
-                    Value="10,0" />
-            <Setter Property="FontSize"
-                    Value="16" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="Height"
-                    Value="50" />
-            <Setter Property="Width"
-                    Value="500" />
+        <Style TargetType="TextBox" x:Key="SearchBoxStyle">
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseLowBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="Padding" Value="10,0" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="500" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Grid>
                             <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="15">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="15">
                                 <Grid>
                                     <ScrollViewer x:Name="PART_ContentHost"
-                                                  Background="Transparent"
-                                                  Padding="{TemplateBinding Padding}" />
+                                              Background="Transparent"
+                                              Padding="{TemplateBinding Padding}" />
                                     <TextBlock Text="Search..."
-                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
-                                               Margin="{TemplateBinding Padding}"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               IsHitTestVisible="False">
+                                           Foreground="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+                                           Margin="{TemplateBinding Padding}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           IsHitTestVisible="False">
                                         <TextBlock.Visibility>
                                             <MultiBinding Converter="{StaticResource PlaceholderVisibilityConverter}">
                                                 <Binding Path="Text.IsEmpty" RelativeSource="{RelativeSource TemplatedParent}" />
@@ -58,10 +48,10 @@
                                 </Grid>
                             </Border>
                             <Border x:Name="FocusBorder"
-                                    BorderBrush="{DynamicResource SystemControlHighlightAccentBrush}"
-                                    BorderThickness="2"
-                                    CornerRadius="15"
-                                    Visibility="Collapsed" />
+                                BorderBrush="{DynamicResource SystemControlHighlightAccentBrush}"
+                                BorderThickness="2"
+                                CornerRadius="15"
+                                Visibility="Collapsed" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsKeyboardFocused" Value="True">
@@ -83,51 +73,55 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <Grid Margin="10">
-                <TextBox Style="{StaticResource SearchBoxStyle}"
+        <Border Grid.Column="0"
+            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+            BorderThickness="1,0,1,0">
+            <Grid>
+                <Grid Margin="10">
+                    <TextBox Style="{StaticResource SearchBoxStyle}"
                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                          HorizontalAlignment="Center"
                          VerticalAlignment="Top" />
-            </Grid>
-            <ProgressBar IsIndeterminate="True"
+                </Grid>
+                <ProgressBar IsIndeterminate="True"
                          Height="30"
-                         Foreground="Gray"
+                         Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
                          Visibility="{Binding IsAllLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Top"
-                         Margin="0,70,0,0"/>
-            <ListBox x:Name="AllCurrenciesListBox"
+                         Margin="0,70,0,0" />
+                <ListBox x:Name="AllCurrenciesListBox"
                      SelectionChanged="Select_curr"
                      ItemsSource="{Binding AllCurrencies}"
                      SelectedItem="{Binding SelectedCurrency}"
                      Visibility="{Binding IsAllLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                      Margin="0,70,0,0"
                      VerticalAlignment="Stretch">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Rank}" Width="50" />
-                            <TextBlock Text="{Binding Name}" Width="200" />
-                            <TextBlock Text="{Binding Symbol}" Width="50" />
-                            <TextBlock Text="{Binding PriceUsd}" Width="100" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Rank}" Width="50" />
+                                <TextBlock Text="{Binding Name}" Width="200" />
+                                <TextBlock Text="{Binding Symbol}" Width="50" />
+                                <TextBlock Text="{Binding PriceUsd}" Width="100" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
 
         <Grid Grid.Column="1">
             <ProgressBar IsIndeterminate="True"
-                         Height="30"
-                         Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
-                         Visibility="{Binding IsAllLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         HorizontalAlignment="Stretch"
-                         VerticalAlignment="Top" />
+                     Height="30"
+                     Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                     Visibility="{Binding IsTopLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Top" />
             <ListBox x:Name="TopCurrenciesListBox"
-                     SelectionChanged="Select_curr"
-                     ItemsSource="{Binding TopCurrencies}"
-                     Visibility="{Binding IsTopLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                 SelectionChanged="Select_curr"
+                 ItemsSource="{Binding TopCurrencies}"
+                 Visibility="{Binding IsTopLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -141,4 +135,5 @@
             </ListBox>
         </Grid>
     </Grid>
+
 </Page>
