@@ -18,6 +18,7 @@ global using LiveChartsCore.SkiaSharpView;
 global using LiveChartsCore;
 global using SkiaSharp;
 global using LiveChartsCore.SkiaSharpView.Painting;
+global using System.Collections.ObjectModel;
 
 namespace WPF;
 

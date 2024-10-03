@@ -4,19 +4,21 @@ internal class HomeViewModel : NotifyPropertyChangedBase
 {
     private readonly CoinCapService coinCapService;
 
-    private List<Currency> topCurrencies;
-    public List<Currency> TopCurrencies
+    private ObservableCollection<Currency> topCurrencies;
+    public ObservableCollection<Currency> TopCurrencies
     {
         get => topCurrencies;
         set => SetProperty(ref topCurrencies, value);
     }
 
-    private List<Currency> allCurrencies;
-    public List<Currency> AllCurrencies
+    private ObservableCollection<Currency> allCurrencies;
+    public ObservableCollection<Currency> AllCurrencies
     {
         get => allCurrencies;
         set => SetProperty(ref allCurrencies, value);
     }
+
+    private List<Currency> allCurrenciesCache;
 
     private bool isTopLoading;
     public bool IsTopLoading
@@ -35,9 +37,13 @@ internal class HomeViewModel : NotifyPropertyChangedBase
     public HomeViewModel()
     {
         coinCapService = new CoinCapService();
+        LoadDataAsync();
+    }
 
-        Task.Run(LoadTopCurrenciesAsync);
-        Task.Run(LoadAllCurrenciesAsync);
+    private async void LoadDataAsync()
+    {
+        await LoadTopCurrenciesAsync();
+        await LoadAllCurrenciesAsync();
     }
 
     public async Task LoadTopCurrenciesAsync()
@@ -45,8 +51,8 @@ internal class HomeViewModel : NotifyPropertyChangedBase
         IsTopLoading = true;
         try
         {
-            await Task.Delay(1000); // Затримка для тестування
-            TopCurrencies = await coinCapService.GetTopNAsync(10);
+            var currencies = await coinCapService.GetTopNAsync(10);
+            TopCurrencies = new ObservableCollection<Currency>(currencies);
         }
         finally
         {
@@ -59,12 +65,43 @@ internal class HomeViewModel : NotifyPropertyChangedBase
         IsAllLoading = true;
         try
         {
-            await Task.Delay(2000); // Затримка для тестування
-            AllCurrencies = await coinCapService.GetAllAsync();
+            await Task.Delay(2000); // delay for testing
+            allCurrenciesCache = await coinCapService.GetAllAsync();
+            AllCurrencies = new ObservableCollection<Currency>(allCurrenciesCache);
         }
         finally
         {
             IsAllLoading = false;
+        }
+    }
+
+    private string searchQuery;
+
+    public string SearchQuery
+    {
+        get => searchQuery;
+        set
+        {
+            searchQuery = value?.Trim();
+            OnPropertyChanged();
+            SearchCryptocurrencies();
+        }
+    }
+
+    private void SearchCryptocurrencies()
+    {
+        if (string.IsNullOrWhiteSpace(SearchQuery))
+        {
+            AllCurrencies = new ObservableCollection<Currency>(allCurrenciesCache);
+        }
+        else
+        {
+            var filtered = allCurrenciesCache.Where(c =>
+                        c.Name.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)
+                        || c.Symbol.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase)
+                        || c.Rank.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase));
+
+            AllCurrencies = new ObservableCollection<Currency>(filtered);
         }
     }
 }
