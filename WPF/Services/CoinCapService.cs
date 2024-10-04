@@ -12,13 +12,13 @@ internal class CoinCapService
         };
     }
 
-    public async Task<List<Currency>> GetTopNAsync(int n)
+    public async Task<List<Exchange>> GetExchangesAsync()
     {
-        var response = await httpClient.GetAsync($"assets?limit={n}");
+        var response = await httpClient.GetAsync($"exchanges");
         response.EnsureSuccessStatusCode();
 
         var content = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<CurrencyResponse>(content);
+        var result = JsonConvert.DeserializeObject<ExchangeResponse>(content);
 
         return result.Data;
     }

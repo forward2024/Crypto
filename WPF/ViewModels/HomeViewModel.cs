@@ -4,28 +4,13 @@ internal class HomeViewModel : NotifyPropertyChangedBase
 {
     private readonly CoinCapService coinCapService;
 
-    private ObservableCollection<Currency> topCurrencies;
-    public ObservableCollection<Currency> TopCurrencies
-    {
-        get => topCurrencies;
-        set => SetProperty(ref topCurrencies, value);
-    }
-
     private ObservableCollection<Currency> allCurrencies;
     public ObservableCollection<Currency> AllCurrencies
     {
         get => allCurrencies;
         set => SetProperty(ref allCurrencies, value);
     }
-
     private List<Currency> allCurrenciesCache;
-
-    private bool isTopLoading;
-    public bool IsTopLoading
-    {
-        get => isTopLoading;
-        set => SetProperty(ref isTopLoading, value);
-    }
 
     private bool isAllLoading;
     public bool IsAllLoading
@@ -33,6 +18,23 @@ internal class HomeViewModel : NotifyPropertyChangedBase
         get => isAllLoading;
         set => SetProperty(ref isAllLoading, value);
     }
+
+
+    private ObservableCollection<Exchange> exchanges;
+    public ObservableCollection<Exchange> Exchanges
+    {
+        get => exchanges;
+        set => SetProperty(ref exchanges, value);
+    }
+    private List<Exchange> exchangesCache;
+
+    private bool isExchangesLoading;
+    public bool IsExchangesLoading
+    {
+        get => isExchangesLoading;
+        set => SetProperty(ref isExchangesLoading, value);
+    }
+
 
     public HomeViewModel()
     {
@@ -42,22 +44,22 @@ internal class HomeViewModel : NotifyPropertyChangedBase
 
     private async void LoadDataAsync()
     {
-        Task.Run(LoadTopCurrenciesAsync);
+        Task.Run(LoadExchangesAsync);
         Task.Run(LoadAllCurrenciesAsync);
     }
 
-    public async Task LoadTopCurrenciesAsync()
+    public async Task LoadExchangesAsync()
     {
-        IsTopLoading = true;
+        IsExchangesLoading = true;
         try
         {
             await Task.Delay(3000); // delay for testing
-            var currencies = await coinCapService.GetTopNAsync(10);
-            TopCurrencies = new ObservableCollection<Currency>(currencies);
+            exchangesCache = await coinCapService.GetExchangesAsync();
+            Exchanges = new ObservableCollection<Exchange>(exchangesCache);
         }
         finally
         {
-            IsTopLoading = false;
+            IsExchangesLoading = false;
         }
     }
 
