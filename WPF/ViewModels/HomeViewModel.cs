@@ -42,8 +42,8 @@ internal class HomeViewModel : NotifyPropertyChangedBase
 
     private async void LoadDataAsync()
     {
-        await LoadTopCurrenciesAsync();
-        await LoadAllCurrenciesAsync();
+        Task.Run(LoadTopCurrenciesAsync);
+        Task.Run(LoadAllCurrenciesAsync);
     }
 
     public async Task LoadTopCurrenciesAsync()
@@ -51,6 +51,7 @@ internal class HomeViewModel : NotifyPropertyChangedBase
         IsTopLoading = true;
         try
         {
+            await Task.Delay(3000); // delay for testing
             var currencies = await coinCapService.GetTopNAsync(10);
             TopCurrencies = new ObservableCollection<Currency>(currencies);
         }
@@ -65,7 +66,7 @@ internal class HomeViewModel : NotifyPropertyChangedBase
         IsAllLoading = true;
         try
         {
-            await Task.Delay(2000); // delay for testing
+            await Task.Delay(3000); // delay for testing
             allCurrenciesCache = await coinCapService.GetAllAsync();
             AllCurrencies = new ObservableCollection<Currency>(allCurrenciesCache);
         }
